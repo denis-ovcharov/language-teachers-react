@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./HomePage.module.css";
 
 export default function HomePage() {
@@ -16,7 +17,9 @@ export default function HomePage() {
                 Tutors: Elevate your language proficiency to new heights by
                 connecting with highly qualified and experienced tutors.
               </p>
-              <button className={styles.button}>Get started</button>
+              <Link to={"/teachers"} className={styles.button}>
+                Get started
+              </Link>
             </div>
             <div>
               <img className={styles.image} src="/block.jpg" alt="" />

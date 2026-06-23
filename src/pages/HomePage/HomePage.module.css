@@ -21,6 +21,10 @@
   line-height: 156%;
   max-width: 280px;
 }
+
+.button:hover {
+  background: #ffdc86;
+}
 .left_side {
   display: flex;
   flex-direction: column;

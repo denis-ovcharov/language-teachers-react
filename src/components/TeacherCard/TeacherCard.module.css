@@ -9,6 +9,13 @@
 .avatarWrapper {
   position: relative;
   flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 3px solid #fbe9ba;
 }
 
 .avatar {
@@ -16,13 +23,12 @@
   height: 96px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #f4c550;
 }
 
 .online {
   position: absolute;
-  bottom: 6px;
-  right: 6px;
+  top: 20px;
+  right: 16px;
   width: 12px;
   height: 12px;
   background: #3cbc81;
@@ -148,17 +154,21 @@
 .reviewerName {
   font-weight: 500;
   font-size: 16px;
+  line-height: 150%;
+  color: #8a8a89;
 }
 
 .reviewerRating {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
   font-size: 14px;
 }
 
 .comment {
+  font-weight: 500;
   font-size: 16px;
+  line-height: 150%;
 }
 
 .levels {
@@ -172,7 +182,9 @@
   padding: 8px 16px;
   border-radius: 32px;
   border: 1px solid rgba(18, 20, 23, 0.2);
+  font-weight: 500;
   font-size: 14px;
+  line-height: 114%;
   cursor: pointer;
 }
 
@@ -182,7 +194,7 @@
 }
 
 .bookBtn {
-  margin-top: 16px;
+  margin-top: 24px;
   padding: 16px 48px;
   background: #f4c550;
   border: none;
@@ -194,5 +206,5 @@
 }
 
 .bookBtn:hover {
-  background: #e0b347;
+  background: #ffdc86;
 }

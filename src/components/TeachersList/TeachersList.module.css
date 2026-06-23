@@ -16,17 +16,19 @@
 }
 
 .loadMore {
-  padding: 14px 48px;
-  background: none;
-  border: 2px solid rgba(18, 20, 23, 0.2);
+  padding: 16px 48px;
+  background: #f4c550;
+  border: none;
   border-radius: 12px;
-  font-size: 18px;
   font-weight: 700;
+  font-size: 18px;
+  line-height: 156%;
+  color: #121417;
   cursor: pointer;
 }
 
 .loadMore:hover {
-  border-color: #f4c550;
+  background: #ffdc86;
 }
 
 .loadMore:disabled {

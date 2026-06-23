@@ -32,11 +32,18 @@ select {
 
 button {
   cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+button:active,
+a:active {
+  transform: scale(0.95);
 }
 
 a {
   color: inherit;
   text-decoration: none;
+  transition: transform 0.15s ease;
 }
 
 ul,

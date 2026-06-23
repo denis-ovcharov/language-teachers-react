@@ -130,7 +130,7 @@ export default function TeacherCard({
         <div className={styles.levels}>
           {teacher.levels.map((level) => (
             <span key={level} className={styles.level}>
-              {level}
+              #{level}
             </span>
           ))}
         </div>
