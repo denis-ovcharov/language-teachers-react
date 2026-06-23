@@ -28,7 +28,7 @@ export default function Header() {
         <nav className={styles.nav}>
           <Link
             to="/"
-            className={`${styles.link} ${pathname === "/language-teachers-react" ? styles.active : ""}`}
+            className={`${styles.link} ${pathname === "/" ? styles.active : ""}`}
           >
             Home
           </Link>
