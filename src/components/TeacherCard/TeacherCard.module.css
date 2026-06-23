@@ -44,8 +44,10 @@
 }
 
 .languages {
-  font-size: 14px;
-  color: rgba(18, 20, 23, 0.7);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: #8a8a89;
   margin-bottom: 4px;
 }
 
@@ -58,7 +60,9 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  font-size: 14px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
 }
 
 .meta span {
@@ -82,8 +86,17 @@
   font-size: 16px;
 }
 
+.speaks_values {
+  text-decoration: underline;
+  text-decoration-color: #8a8a89;
+  text-decoration-skip-ink: none;
+}
+
 .info span {
-  color: rgba(18, 20, 23, 0.7);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: #8a8a89;
 }
 
 .readMore {
