@@ -19,7 +19,7 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        <Link to="/language-teachers-react" className={styles.logo}>
+        <Link to="/" className={styles.logo}>
           <svg width={28} height={28}>
             <use href="/language-teachers-react/ukraine.svg"></use>
           </svg>
@@ -27,7 +27,7 @@ export default function Header() {
         </Link>
         <nav className={styles.nav}>
           <Link
-            to="/language-teachers-react"
+            to="/"
             className={`${styles.link} ${pathname === "/language-teachers-react" ? styles.active : ""}`}
           >
             Home
