@@ -22,7 +22,11 @@ export default function HomePage() {
               </Link>
             </div>
             <div>
-              <img className={styles.image} src="/block.jpg" alt="" />
+              <img
+                className={styles.image}
+                src="/language-teachers-react/block.jpg"
+                alt=""
+              />
             </div>
           </div>
           <div className={styles.box}>

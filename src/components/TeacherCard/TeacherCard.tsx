@@ -57,17 +57,17 @@ export default function TeacherCard({
               <PiBookOpenTextLight size={16} /> Lessons online
             </span>
             <svg width={1} height={16}>
-              <use href="/line.svg"></use>
+              <use href="/language-teachers-react/line.svg"></use>
             </svg>
             <span>Lessons done: {teacher.lessons_done}</span>
             <svg width={1} height={16}>
-              <use href="/line.svg"></use>
+              <use href="/language-teachers-react/line.svg"></use>
             </svg>
             <span>
               <FaStar size={16} color="#F4C550" /> Rating: {teacher.rating}
             </span>
             <svg width={1} height={16}>
-              <use href="/line.svg"></use>
+              <use href="/language-teachers-react/line.svg"></use>
             </svg>
             <span>
               Price / 1 hour:{" "}
