@@ -12,7 +12,7 @@ function App() {
       <Header />
       <main>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/language-teachers-react" element={<HomePage />} />
           <Route path="/teachers" element={<TeachersPage />} />
           <Route
             path="/favorites"
