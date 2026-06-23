@@ -1,6 +1,6 @@
 // import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, HashRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import App from "./components/App/App";
 import "./global.css";
