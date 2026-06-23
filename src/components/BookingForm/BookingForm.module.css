@@ -1,0 +1,110 @@
+.title {
+  font-size: 40px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  color: rgba(18, 20, 23, 0.7);
+  font-size: 16px;
+  margin-bottom: 24px;
+}
+
+.teacher {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.teacherLabel {
+  font-size: 12px;
+  color: rgba(18, 20, 23, 0.7);
+}
+
+.teacherName {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.question {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.reasons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.radioInput {
+  width: 20px;
+  height: 20px;
+  accent-color: #f4c550;
+  cursor: pointer;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 32px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.input {
+  width: 100%;
+  padding: 16px 18px;
+  border: 1px solid rgba(18, 20, 23, 0.1);
+  border-radius: 12px;
+  font-size: 16px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.input:focus {
+  border-color: #f4c550;
+}
+
+.error {
+  font-size: 12px;
+  color: red;
+}
+
+.submit {
+  width: 100%;
+  padding: 16px;
+  background: #f4c550;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.submit:hover {
+  background: #e0b347;
+}

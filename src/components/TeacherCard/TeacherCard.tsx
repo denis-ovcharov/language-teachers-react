@@ -5,6 +5,8 @@ import type { Teacher } from "../../types";
 import { useAuth } from "../../context/AuthContext";
 import styles from "./TeacherCard.module.css";
 import toast from "react-hot-toast";
+import Modal from "../Modal/Modal";
+import BookingForm from "../BookingForm/BookingForm";
 
 interface TeacherCardProps {
   teacher: Teacher;
@@ -19,6 +21,7 @@ export default function TeacherCard({
 }: TeacherCardProps) {
   const { user } = useAuth();
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
 
   const handleFavorite = () => {
     if (!user) {
@@ -136,9 +139,22 @@ export default function TeacherCard({
         </div>
 
         {isExpanded && (
-          <button className={styles.bookBtn}>Book trial lesson</button>
+          <button
+            className={styles.bookBtn}
+            onClick={() => setIsBookingOpen(true)}
+          >
+            Book trial lesson
+          </button>
         )}
       </div>
+      {isBookingOpen && (
+        <Modal onClose={() => setIsBookingOpen(false)}>
+          <BookingForm
+            teacher={teacher}
+            onClose={() => setIsBookingOpen(false)}
+          />
+        </Modal>
+      )}
     </div>
   );
 }
