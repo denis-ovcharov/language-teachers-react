@@ -1,13 +1,5 @@
-/* eslint-disable react-hooks/set-state-in-effect */
-import { useState, useEffect } from "react";
-import {
-  ref,
-  query,
-  limitToFirst,
-  orderByKey,
-  startAfter,
-  get,
-} from "firebase/database";
+import { useState, useEffect, useMemo } from "react";
+import { ref, get } from "firebase/database";
 import { db } from "../../lib/firebase";
 import type { Teacher } from "../../types";
 import TeacherCard from "../TeacherCard/TeacherCard";
@@ -18,65 +10,65 @@ const PAGE_SIZE = 4;
 interface TeachersListProps {
   favorites: string[];
   onToggleFavorite: (id: string) => void;
+  language: string;
+  level: string;
+  price: string;
 }
 
 export default function TeachersList({
   favorites,
   onToggleFavorite,
+  language,
+  level,
+  price,
 }: TeachersListProps) {
-  const [teachers, setTeachers] = useState<Teacher[]>([]);
-  const [lastKey, setLastKey] = useState<string | null>(null);
-  const [hasMore, setHasMore] = useState(true);
+  const [allTeachers, setAllTeachers] = useState<Teacher[]>([]);
+  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
-  const fetchTeachers = async (startKey?: string) => {
-    setLoading(true);
-    try {
-      const teachersRef = ref(db, "teachers");
-      const q = startKey
-        ? query(
-            teachersRef,
-            orderByKey(),
-            startAfter(startKey),
-            limitToFirst(PAGE_SIZE),
-          )
-        : query(teachersRef, orderByKey(), limitToFirst(PAGE_SIZE));
-
-      const snapshot = await get(q);
-      if (!snapshot.exists()) {
-        setHasMore(false);
-        return;
-      }
-
-      const data = snapshot.val();
-      const loaded: Teacher[] = Object.entries(data).map(([id, value]) => ({
-        ...(value as Omit<Teacher, "id">),
-        id,
-      }));
-
-      setTeachers((prev) => [...prev, ...loaded]);
-      setLastKey(loaded[loaded.length - 1].id);
-      if (loaded.length < PAGE_SIZE) setHasMore(false);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    fetchTeachers();
+    const fetchTeachers = async () => {
+      setLoading(true);
+      try {
+        const snapshot = await get(ref(db, "teachers"));
+        if (!snapshot.exists()) return;
+        const data = snapshot.val();
+        const loaded: Teacher[] = Object.entries(data).map(([id, value]) => ({
+          ...(value as Omit<Teacher, "id">),
+          id,
+        }));
+        setAllTeachers(loaded);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    void fetchTeachers();
   }, []);
+
+  const filtered = useMemo(() => {
+    return allTeachers.filter((t) => {
+      if (language !== "All" && !t.languages.includes(language)) return false;
+      if (level !== "All" && !t.levels.includes(level)) return false;
+      if (price !== "All" && t.price_per_hour !== Number(price)) return false;
+      return true;
+    });
+  }, [allTeachers, language, level, price]);
+
+  const visible = filtered.slice(0, page * PAGE_SIZE);
+  const hasMore = visible.length < filtered.length;
 
   return (
     <div className={styles.wrapper}>
       <ul className={styles.list}>
-        {teachers.map((teacher) => (
+        {visible.map((teacher) => (
           <li key={teacher.id}>
             <TeacherCard
               teacher={teacher}
               isFavorite={favorites.includes(teacher.id)}
               onToggleFavorite={onToggleFavorite}
+              activeLevel={level === "All" ? undefined : level}
             />
           </li>
         ))}
@@ -84,10 +76,10 @@ export default function TeachersList({
       {hasMore && (
         <button
           className={styles.loadMore}
-          onClick={() => fetchTeachers(lastKey ?? undefined)}
+          onClick={() => setPage((p) => p + 1)}
           disabled={loading}
         >
-          {loading ? "Loading..." : "Load more"}
+          Load more
         </button>
       )}
     </div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import TeachersList from "../../components/TeachersList/TeachersList";
+import FiltersBox from "../../components/FiltersBox/FiltersBox";
 import styles from "./Teachers.module.css";
 
 export default function Teachers() {
@@ -10,6 +11,10 @@ export default function Teachers() {
     const stored = localStorage.getItem(`favorites_${user.uid}`);
     return stored ? JSON.parse(stored) : [];
   });
+
+  const [language, setLanguage] = useState("All");
+  const [level, setLevel] = useState("All");
+  const [price, setPrice] = useState("All");
 
   const handleToggleFavorite = (id: string) => {
     if (!user) return;
@@ -24,9 +29,20 @@ export default function Teachers() {
 
   return (
     <div className={styles.container}>
+      <FiltersBox
+        language={language}
+        level={level}
+        price={price}
+        onLanguageChange={setLanguage}
+        onLevelChange={setLevel}
+        onPriceChange={setPrice}
+      />
       <TeachersList
         favorites={favorites}
         onToggleFavorite={handleToggleFavorite}
+        language={language}
+        level={level}
+        price={price}
       />
     </div>
   );

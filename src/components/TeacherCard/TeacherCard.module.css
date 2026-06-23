@@ -188,7 +188,7 @@
   cursor: pointer;
 }
 
-.level:first-child {
+.levelActive {
   background: #f4c550;
   border-color: #f4c550;
 }

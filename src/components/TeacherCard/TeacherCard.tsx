@@ -12,12 +12,14 @@ interface TeacherCardProps {
   teacher: Teacher;
   isFavorite: boolean;
   onToggleFavorite: (id: string) => void;
+  activeLevel?: string;
 }
 
 export default function TeacherCard({
   teacher,
   isFavorite,
   onToggleFavorite,
+  activeLevel,
 }: TeacherCardProps) {
   const { user } = useAuth();
   const [isExpanded, setIsExpanded] = useState(false);
@@ -132,7 +134,10 @@ export default function TeacherCard({
 
         <div className={styles.levels}>
           {teacher.levels.map((level) => (
-            <span key={level} className={styles.level}>
+            <span
+              key={level}
+              className={`${styles.level} ${activeLevel === level ? styles.levelActive : ""}`}
+            >
               #{level}
             </span>
           ))}

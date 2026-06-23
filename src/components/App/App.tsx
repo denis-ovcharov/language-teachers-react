@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import Header from "../Header/Header";
-import HomePage from "../../pages/HomePage/Home";
-import TeachersPage from "../../pages/TeachersPage/Teachers";
-import FavoritesPage from "../../pages/FavoritesPage/Favorites";
+import HomePage from "../../pages/Home/Home";
+import TeachersPage from "../../pages/Teachers/Teachers";
+import FavoritesPage from "../../pages/Favorites/Favorites";
 import { PrivateRoute } from "../PrivateRoute/PrivateRoute";
 import { Toaster } from "react-hot-toast";
 
