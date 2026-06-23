@@ -21,7 +21,7 @@ export default function Header() {
       <div className={styles.container}>
         <Link to="/" className={styles.logo}>
           <svg width={28} height={28}>
-            <use href="/public/ukraine.svg"></use>
+            <use href="/language-teachers-react/ukraine.svg"></use>
           </svg>
           LearnLingo
         </Link>
