@@ -5,6 +5,7 @@ import * as yup from "yup";
 import { useAuth } from "../../context/AuthContext";
 import styles from "./LoginForm.module.css";
 import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
+import toast from "react-hot-toast";
 
 const schema = yup.object({
   email: yup.string().email("Invalid email").required("Email is required"),
@@ -36,8 +37,9 @@ export default function LoginForm({ onClose }: LoginFormProps) {
     try {
       await login(data.email, data.password);
       onClose();
-    } catch (error) {
-      console.error(error);
+    } catch {
+      // console.error(error);
+      toast.error("Invalid credentials");
     }
   };
 

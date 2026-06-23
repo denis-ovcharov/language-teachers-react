@@ -6,6 +6,7 @@ import LoginForm from "../LoginForm/LoginForm";
 import RegistrationForm from "../RegistrationForm/RegistrationForm";
 import styles from "./Header.module.css";
 import { LuLogIn } from "react-icons/lu";
+import { FiLogOut } from "react-icons/fi";
 
 type ModalType = "login" | "register" | null;
 
@@ -29,7 +30,10 @@ export default function Header() {
         </nav>
         <div className={styles.actions}>
           {user ? (
-            <button onClick={logout}>Log out</button>
+            <button className={styles.logoutBtn} onClick={logout}>
+              Log out
+              <FiLogOut size={20} color="orange" />
+            </button>
           ) : (
             <>
               <button
