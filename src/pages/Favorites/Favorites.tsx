@@ -5,6 +5,7 @@ import { useAuth } from "../../context/AuthContext";
 import type { Teacher } from "../../types";
 import TeacherCard from "../../components/TeacherCard/TeacherCard";
 import styles from "./Favorites.module.css";
+import Loader from "../../components/Loader/Loader";
 
 export default function Favorites() {
   const { user } = useAuth();
@@ -54,7 +55,7 @@ export default function Favorites() {
     });
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loader />;
 
   return (
     <div className={styles.container}>
