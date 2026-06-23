@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import Modal from "../Modal/Modal";
 import LoginForm from "../LoginForm/LoginForm";
@@ -14,6 +14,8 @@ export default function Header() {
   const { user, logout } = useAuth();
   const [modal, setModal] = useState<ModalType>(null);
 
+  const { pathname } = useLocation();
+
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -24,9 +26,26 @@ export default function Header() {
           LearnLingo
         </Link>
         <nav className={styles.nav}>
-          <Link to="/">Home</Link>
-          <Link to="/teachers">Teachers</Link>
-          {user && <Link to="/favorites">Favorites</Link>}
+          <Link
+            to="/"
+            className={`${styles.link} ${pathname === "/" ? styles.active : ""}`}
+          >
+            Home
+          </Link>
+          <Link
+            to="/teachers"
+            className={`${styles.link} ${pathname === "/teachers" ? styles.active : ""}`}
+          >
+            Teachers
+          </Link>
+          {user && (
+            <Link
+              to="/favorites"
+              className={`${styles.link} ${pathname === "/favorites" ? styles.active : ""}`}
+            >
+              Favorites
+            </Link>
+          )}
         </nav>
         <div className={styles.actions}>
           {user ? (
