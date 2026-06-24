@@ -21,6 +21,7 @@ export default function Favorites() {
   const [teachers, setTeachers] = useState<Teacher[]>([]);
   const [favorites, setFavorites] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
+  const [favoritesLoaded, setFavoritesLoaded] = useState(false);
 
   // Завантажуємо favorites з Firestore
   useEffect(() => {
@@ -30,7 +31,6 @@ export default function Favorites() {
       try {
         const userRef = doc(firestore, "users", user.uid);
         const snap = await getDoc(userRef);
-
         if (snap.exists()) {
           setFavorites(snap.data().favorites ?? []);
         } else {
@@ -39,7 +39,7 @@ export default function Favorites() {
       } catch (error) {
         console.error(error);
       } finally {
-        setLoading(false);
+        setFavoritesLoaded(true); // сигнал що favorites готові
       }
     };
 
@@ -48,9 +48,14 @@ export default function Favorites() {
 
   // Завантажуємо вчителів коли favorites готові
   useEffect(() => {
-    if (!user || favorites.length === 0) return;
+    if (!favoritesLoaded) return;
 
     const fetchTeachers = async () => {
+      if (favorites.length === 0) {
+        setLoading(false);
+        return;
+      }
+
       try {
         const snapshot = await get(ref(db, "teachers"));
         if (!snapshot.exists()) return;
@@ -68,7 +73,7 @@ export default function Favorites() {
     };
 
     void fetchTeachers();
-  }, [favorites, user]);
+  }, [favoritesLoaded, favorites, user]);
 
   const handleToggleFavorite = async (id: string) => {
     if (!user) return;
