@@ -3,8 +3,10 @@
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* Safely align from top when content overflows */
   justify-content: center;
+  overflow-y: auto; /* Enable scroll on backdrop */
+  padding: 20px 16px;
   z-index: 2000; /* High index to cover everything, including mobile header drawer */
 }
 
@@ -14,10 +16,10 @@
   padding: 40px 20px;
   position: relative;
   width: 100%;
-  max-width: calc(100% - 32px);
-  margin: 16px;
-  max-height: calc(100vh - 32px);
-  overflow-y: auto;
+  max-width: 566px;
+  margin-top: auto;
+  margin-bottom: auto; /* Dynamic vertical centering */
+  box-sizing: border-box;
 }
 
 .close {
@@ -32,6 +34,7 @@
   justify-content: center;
   color: var(--text-main);
   padding: 4px;
+  z-index: 10; /* Ensure it stays above form content */
 }
 
 /* Breakpoint: Tablet (>= 768px) */
@@ -39,13 +42,48 @@
   .modal {
     border-radius: 24px;
     padding: 64px;
-    max-width: 566px;
-    margin: 0;
-    max-height: 90vh; /* standard modal max-height to avoid cut-off */
+    margin-top: auto;
+    margin-bottom: auto;
   }
 
   .close {
     top: 24px;
     right: 24px;
+  }
+
+  /* Booking form modal override to set exact dimensions and support responsive scaling */
+  .bookingModal {
+    width: 600px;
+    height: 972px;
+    max-height: none;
+  }
+
+  /* Responsive height/spacing adjustments directly on the modal box based on viewport height */
+  @media (max-height: 1020px) {
+    .bookingModal {
+      height: 880px;
+      padding: 48px;
+    }
+  }
+
+  @media (max-height: 920px) {
+    .bookingModal {
+      height: 780px;
+      padding: 40px;
+    }
+  }
+
+  @media (max-height: 820px) {
+    .bookingModal {
+      height: 680px;
+      padding: 32px 40px;
+    }
+  }
+
+  @media (max-height: 720px) {
+    .bookingModal {
+      height: 580px;
+      padding: 24px 32px;
+    }
   }
 }

@@ -5,9 +5,10 @@ import { RxCross2 } from "react-icons/rx";
 interface ModalProps {
   onClose: () => void;
   children: React.ReactNode;
+  variant?: "default" | "booking";
 }
 
-export default function Modal({ onClose, children }: ModalProps) {
+export default function Modal({ onClose, children, variant = "default" }: ModalProps) {
   useEffect(() => {
     document.body.style.overflow = "hidden";
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -20,9 +21,11 @@ export default function Modal({ onClose, children }: ModalProps) {
     };
   }, [onClose]);
 
+  const modalClass = `${styles.modal} ${variant === "booking" ? styles.bookingModal : ""}`;
+
   return (
     <div className={styles.backdrop} onClick={onClose}>
-      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+      <div className={modalClass} onClick={(e) => e.stopPropagation()}>
         <button className={styles.close} onClick={onClose}>
           <RxCross2 size={30} />
         </button>
