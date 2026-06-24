@@ -1,6 +1,15 @@
 import { useState, useEffect } from "react";
 import { ref, get } from "firebase/database";
+import {
+  doc,
+  getDoc,
+  updateDoc,
+  setDoc,
+  arrayUnion,
+  arrayRemove,
+} from "firebase/firestore";
 import { db } from "../../lib/firebase";
+import { firestore } from "../../lib/firebase";
 import { useAuth } from "../../context/AuthContext";
 import type { Teacher } from "../../types";
 import TeacherCard from "../../components/TeacherCard/TeacherCard";
@@ -10,19 +19,38 @@ import Loader from "../../components/Loader/Loader";
 export default function Favorites() {
   const { user } = useAuth();
   const [teachers, setTeachers] = useState<Teacher[]>([]);
-  const [favorites, setFavorites] = useState<string[]>(() => {
-    if (!user) return [];
-    const stored = localStorage.getItem(`favorites_${user.uid}`);
-    return stored ? JSON.parse(stored) : [];
-  });
+  const [favorites, setFavorites] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // Завантажуємо favorites з Firestore
   useEffect(() => {
+    if (!user) return;
+
     const fetchFavorites = async () => {
-      if (!user || favorites.length === 0) {
+      try {
+        const userRef = doc(firestore, "users", user.uid);
+        const snap = await getDoc(userRef);
+
+        if (snap.exists()) {
+          setFavorites(snap.data().favorites ?? []);
+        } else {
+          await setDoc(userRef, { favorites: [] });
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
         setLoading(false);
-        return;
       }
+    };
+
+    void fetchFavorites();
+  }, [user]);
+
+  // Завантажуємо вчителів коли favorites готові
+  useEffect(() => {
+    if (!user || favorites.length === 0) return;
+
+    const fetchTeachers = async () => {
       try {
         const snapshot = await get(ref(db, "teachers"));
         if (!snapshot.exists()) return;
@@ -38,20 +66,24 @@ export default function Favorites() {
         setLoading(false);
       }
     };
-    void fetchFavorites();
+
+    void fetchTeachers();
   }, [favorites, user]);
 
-  const handleToggleFavorite = (id: string) => {
+  const handleToggleFavorite = async (id: string) => {
     if (!user) return;
-    setFavorites((prev) => {
-      const updated = prev.includes(id)
-        ? prev.filter((f) => f !== id)
-        : [...prev, id];
-      localStorage.setItem(`favorites_${user.uid}`, JSON.stringify(updated));
-      setTeachers((prevTeachers) =>
-        prevTeachers.filter((t) => updated.includes(t.id)),
-      );
-      return updated;
+
+    const userRef = doc(firestore, "users", user.uid);
+    const isFav = favorites.includes(id);
+
+    // Оптимістичний апдейт UI
+    setFavorites((prev) =>
+      isFav ? prev.filter((f) => f !== id) : [...prev, id],
+    );
+    setTeachers((prev) => prev.filter((t) => t.id !== id));
+
+    await updateDoc(userRef, {
+      favorites: isFav ? arrayRemove(id) : arrayUnion(id),
     });
   };
 

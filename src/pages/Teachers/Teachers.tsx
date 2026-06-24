@@ -1,4 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import {
+  doc,
+  getDoc,
+  updateDoc,
+  setDoc,
+  arrayUnion,
+  arrayRemove,
+} from "firebase/firestore";
+import { firestore } from "../../lib/firebase";
 import { useAuth } from "../../context/AuthContext";
 import TeachersList from "../../components/TeachersList/TeachersList";
 import FiltersBox from "../../components/FiltersBox/FiltersBox";
@@ -6,24 +15,44 @@ import styles from "./Teachers.module.css";
 
 export default function Teachers() {
   const { user } = useAuth();
-  const [favorites, setFavorites] = useState<string[]>(() => {
-    if (!user) return [];
-    const stored = localStorage.getItem(`favorites_${user.uid}`);
-    return stored ? JSON.parse(stored) : [];
-  });
+  const [favorites, setFavorites] = useState<string[]>([]);
 
   const [language, setLanguage] = useState("All");
   const [level, setLevel] = useState("All");
   const [price, setPrice] = useState("All");
 
-  const handleToggleFavorite = (id: string) => {
+  // Завантажуємо favorites з Firestore при логіні
+  useEffect(() => {
     if (!user) return;
-    setFavorites((prev) => {
-      const updated = prev.includes(id)
-        ? prev.filter((f) => f !== id)
-        : [...prev, id];
-      localStorage.setItem(`favorites_${user.uid}`, JSON.stringify(updated));
-      return updated;
+
+    const fetchFavorites = async () => {
+      const userRef = doc(firestore, "users", user.uid);
+      const snap = await getDoc(userRef);
+      if (snap.exists()) {
+        setFavorites(snap.data().favorites ?? []);
+      } else {
+        await setDoc(userRef, { favorites: [] });
+        setFavorites([]);
+      }
+    };
+
+    void fetchFavorites();
+  }, [user]);
+
+  const handleToggleFavorite = async (id: string) => {
+    if (!user) return;
+
+    const ref = doc(firestore, "users", user.uid);
+    const isFav = favorites.includes(id);
+
+    // Оптимістичний апдейт UI
+    setFavorites((prev) =>
+      isFav ? prev.filter((f) => f !== id) : [...prev, id],
+    );
+
+    // Синхронізуємо з Firestore
+    await updateDoc(ref, {
+      favorites: isFav ? arrayRemove(id) : arrayUnion(id),
     });
   };
 
