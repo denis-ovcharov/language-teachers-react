@@ -61,7 +61,7 @@ body {
 
 @media (min-width: 1280px) {
   .container {
-    max-width: 1184px;
+    max-width: 1255px;
     padding-left: 0;
     padding-right: 0;
   }
