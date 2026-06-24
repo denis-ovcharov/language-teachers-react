@@ -28,7 +28,7 @@ export default function Teachers() {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={`container ${styles.wrapper}`}>
       <FiltersBox
         language={language}
         level={level}

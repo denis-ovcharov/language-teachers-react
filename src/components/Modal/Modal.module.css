@@ -5,24 +5,47 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 100;
+  z-index: 2000; /* High index to cover everything, including mobile header drawer */
 }
 
 .modal {
-  background: #fff;
-  border-radius: 24px;
-  padding: 64px;
+  background: var(--bg-white);
+  border-radius: 16px;
+  padding: 40px 20px;
   position: relative;
   width: 100%;
-  max-width: 566px;
+  max-width: calc(100% - 32px);
+  margin: 16px;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
 }
 
 .close {
   position: absolute;
-  top: 24px;
-  right: 24px;
+  top: 16px;
+  right: 16px;
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-main);
+  padding: 4px;
+}
+
+/* Breakpoint: Tablet (>= 768px) */
+@media (min-width: 768px) {
+  .modal {
+    border-radius: 24px;
+    padding: 64px;
+    max-width: 566px;
+    margin: 0;
+    max-height: 90vh; /* standard modal max-height to avoid cut-off */
+  }
+
+  .close {
+    top: 24px;
+    right: 24px;
+  }
 }

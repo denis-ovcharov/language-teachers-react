@@ -5,7 +5,7 @@ export default function HomePage() {
   return (
     <>
       <section>
-        <div className={styles.container}>
+        <div className="container-large">
           <div className={styles.title_and_img}>
             <div className={styles.left_side}>
               <h1 className={styles.title}>

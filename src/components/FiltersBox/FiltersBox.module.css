@@ -1,38 +1,52 @@
 .wrapper {
   display: flex;
-  gap: 20px;
+  flex-direction: column;
+  gap: 16px;
   margin-bottom: 32px;
-  background-color: #f8f8f8;
 }
 
 .group {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  width: 100%;
 }
 
 .label {
   font-weight: 500;
   font-size: 14px;
   line-height: 129%;
-  color: #8a8a89;
+  color: var(--text-secondary);
 }
 
 .select {
+  width: 100%;
   padding: 14px 18px;
   border: none;
   border-radius: 14px;
-  background: #fff;
+  background: var(--bg-white);
   font-size: 18px;
   font-weight: 500;
   line-height: 111%;
-  line-height: 111%;
-  color: #121417;
+  color: var(--text-main);
   cursor: pointer;
   outline: none;
   appearance: none;
   padding-right: 48px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23121417' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 16px center;
+}
+
+/* Breakpoint: Tablet (>= 768px) */
+@media (min-width: 768px) {
+  .wrapper {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .group {
+    width: auto;
+  }
 }

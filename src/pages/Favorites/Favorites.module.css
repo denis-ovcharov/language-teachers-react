@@ -1,7 +1,17 @@
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 96px 24px;
+.wrapper {
+  padding: 32px 0;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    padding: 48px 0;
+  }
+}
+
+@media (min-width: 1280px) {
+  .wrapper {
+    padding: 96px 0;
+  }
 }
 
 .list {

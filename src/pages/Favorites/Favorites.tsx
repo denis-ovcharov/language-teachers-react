@@ -58,7 +58,7 @@ export default function Favorites() {
   if (loading) return <Loader />;
 
   return (
-    <div className={styles.container}>
+    <div className={`container ${styles.wrapper}`}>
       {teachers.length === 0 ? (
         <p className={styles.empty}>No favorite teachers yet.</p>
       ) : (

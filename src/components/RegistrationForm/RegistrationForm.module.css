@@ -1,19 +1,20 @@
 .title {
-  font-size: 40px;
+  font-size: 28px;
   font-weight: 500;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
+  color: var(--text-main);
 }
 
 .subtitle {
   color: rgba(18, 20, 23, 0.7);
-  margin-bottom: 40px;
-  font-size: 16px;
+  margin-bottom: 24px;
+  font-size: 14px;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
 }
 
 .field {
@@ -24,16 +25,18 @@
 
 .input {
   width: 100%;
-  padding: 16px 18px;
-  border: 1px solid rgba(18, 20, 23, 0.1);
+  padding: 14px 16px;
+  border: 1px solid var(--border-light);
   border-radius: 12px;
   font-size: 16px;
   outline: none;
   box-sizing: border-box;
+  background-color: var(--bg-white);
+  color: var(--text-main);
 }
 
 .input:focus {
-  border-color: #f4c550;
+  border-color: var(--primary-color);
 }
 
 .passwordWrapper {
@@ -42,13 +45,17 @@
 
 .eye {
   position: absolute;
-  right: 18px;
+  right: 16px;
   top: 50%;
   transform: translateY(-50%);
   background: none;
   border: none;
   cursor: pointer;
   font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-main);
 }
 
 .error {
@@ -59,15 +66,42 @@
 .submit {
   width: 100%;
   padding: 16px;
-  background: #f4c550;
+  background: var(--primary-color);
   border: none;
   border-radius: 12px;
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
   margin-top: 8px;
+  color: var(--text-main);
+  transition: background-color 0.15s ease;
 }
 
 .submit:hover {
-  background: #e0b347;
+  background: var(--primary-hover);
+}
+
+/* Breakpoint: Tablet (>= 768px) */
+@media (min-width: 768px) {
+  .title {
+    font-size: 40px;
+    margin-bottom: 20px;
+  }
+
+  .subtitle {
+    margin-bottom: 40px;
+    font-size: 16px;
+  }
+
+  .form {
+    gap: 18px;
+  }
+
+  .input {
+    padding: 16px 18px;
+  }
+
+  .eye {
+    right: 18px;
+  }
 }

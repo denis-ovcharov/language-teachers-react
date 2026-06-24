@@ -1,3 +1,18 @@
+:root {
+  --primary-color: #f4c550;
+  --primary-hover: #ffdc86;
+  --primary-light: #fbe9ba;
+  --primary-dark: #e0b347;
+  --text-main: #121417;
+  --text-secondary: #8a8a89;
+  --bg-gray: #f8f8f8;
+  --bg-white: #ffffff;
+  --color-green: #3cbc81;
+  --color-green-alt: #38cd3e;
+  --border-light: rgba(18, 20, 23, 0.1);
+  --border-medium: rgba(18, 20, 23, 0.2);
+}
+
 *,
 *::before,
 *::after {
@@ -12,7 +27,49 @@
 body {
   font-family: "Roboto", sans-serif;
   min-height: 100vh;
-  color: #121417;
+  color: var(--text-main);
+  background-color: var(--bg-white);
+}
+
+/* Global Containers */
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.container-large {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .container-large {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1184px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .container-large {
+    max-width: 1440px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
 }
 
 img,

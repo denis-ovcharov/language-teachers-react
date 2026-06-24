@@ -1,20 +1,21 @@
 .title {
-  font-size: 40px;
+  font-size: 28px;
   font-weight: 500;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
+  color: var(--text-main);
 }
 
 .subtitle {
   color: rgba(18, 20, 23, 0.7);
-  font-size: 16px;
-  margin-bottom: 24px;
+  font-size: 14px;
+  margin-bottom: 20px;
 }
 
 .teacher {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 
 .avatar {
@@ -32,19 +33,21 @@
 .teacherName {
   font-size: 16px;
   font-weight: 700;
+  color: var(--text-main);
 }
 
 .question {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
+  color: var(--text-main);
 }
 
 .reasons {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 
 .radio {
@@ -53,20 +56,21 @@
   gap: 8px;
   font-size: 16px;
   cursor: pointer;
+  color: var(--text-main);
 }
 
 .radioInput {
   width: 20px;
   height: 20px;
-  accent-color: #f4c550;
+  accent-color: var(--primary-color);
   cursor: pointer;
 }
 
 .fields {
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  margin-bottom: 32px;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
 .field {
@@ -77,16 +81,18 @@
 
 .input {
   width: 100%;
-  padding: 16px 18px;
-  border: 1px solid rgba(18, 20, 23, 0.1);
+  padding: 14px 16px;
+  border: 1px solid var(--border-light);
   border-radius: 12px;
   font-size: 16px;
   outline: none;
   box-sizing: border-box;
+  background-color: var(--bg-white);
+  color: var(--text-main);
 }
 
 .input:focus {
-  border-color: #f4c550;
+  border-color: var(--primary-color);
 }
 
 .error {
@@ -97,14 +103,51 @@
 .submit {
   width: 100%;
   padding: 16px;
-  background: #f4c550;
+  background: var(--primary-color);
   border: none;
   border-radius: 12px;
   font-size: 18px;
   font-weight: 700;
   cursor: pointer;
+  color: var(--text-main);
+  transition: background-color 0.15s ease;
 }
 
 .submit:hover {
-  background: #fbe9ba;
+  background: var(--primary-hover);
+}
+
+/* Breakpoint: Tablet (>= 768px) */
+@media (min-width: 768px) {
+  .title {
+    font-size: 40px;
+    margin-bottom: 20px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+
+  .teacher {
+    margin-bottom: 32px;
+  }
+
+  .question {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .reasons {
+    margin-bottom: 32px;
+  }
+
+  .fields {
+    gap: 18px;
+    margin-bottom: 32px;
+  }
+
+  .input {
+    padding: 16px 18px;
+  }
 }

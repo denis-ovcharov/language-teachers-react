@@ -1,39 +1,42 @@
 .card {
-  background: #fff;
+  background: var(--bg-white);
   border-radius: 24px;
-  padding: 24px;
+  padding: 16px;
   display: flex;
-  gap: 24px;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
 }
 
 .avatarWrapper {
   position: relative;
   flex-shrink: 0;
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  border: 3px solid #fbe9ba;
+  border: 3px solid var(--primary-light);
+  align-self: center;
 }
 
 .avatar {
-  width: 96px;
-  height: 96px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   object-fit: cover;
 }
 
 .online {
   position: absolute;
-  top: 20px;
-  right: 16px;
+  top: 12px;
+  right: 10px;
   width: 12px;
   height: 12px;
-  background: #3cbc81;
+  background: var(--color-green);
   border-radius: 50%;
-  border: 2px solid #fff;
+  border: 2px solid var(--bg-white);
 }
 
 .content {
@@ -45,30 +48,33 @@
 
 .top {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .languages {
   font-weight: 500;
   font-size: 16px;
   line-height: 150%;
-  color: #8a8a89;
+  color: var(--text-secondary);
   margin-bottom: 4px;
 }
 
 .name {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 500;
 }
 
 .meta {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 16px;
+  gap: 8px 16px;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 150%;
+  color: var(--text-main);
+  padding-right: 40px;
 }
 
 .meta span {
@@ -77,32 +83,43 @@
   gap: 4px;
 }
 
+.divider {
+  display: none;
+}
+
 .price {
-  color: #38cd3e;
+  color: var(--color-green-alt);
 }
 
 .favorite {
+  position: absolute;
+  top: 16px;
+  right: 16px;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .info {
-  font-size: 16px;
+  font-size: 15px;
+  line-height: 140%;
 }
 
 .speaks_values {
   text-decoration: underline;
-  text-decoration-color: #8a8a89;
+  text-decoration-color: var(--text-secondary);
   text-decoration-skip-ink: none;
 }
 
 .info span {
   font-weight: 500;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 150%;
-  color: #8a8a89;
+  color: var(--text-secondary);
 }
 
 .readMore {
@@ -112,12 +129,13 @@
   font-size: 16px;
   font-weight: 500;
   text-decoration: underline;
-  padding: 0;
+  padding: 8px 0;
   width: fit-content;
+  color: var(--text-main);
 }
 
 .experience {
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.6;
 }
 
@@ -143,7 +161,7 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: #f0f0f0;
+  background: var(--bg-gray);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -155,7 +173,7 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 150%;
-  color: #8a8a89;
+  color: var(--text-secondary);
 }
 
 .reviewerRating {
@@ -167,7 +185,7 @@
 
 .comment {
   font-weight: 500;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 150%;
 }
 
@@ -181,7 +199,7 @@
 .level {
   padding: 8px 16px;
   border-radius: 32px;
-  border: 1px solid rgba(18, 20, 23, 0.2);
+  border: 1px solid var(--border-medium);
   font-weight: 500;
   font-size: 14px;
   line-height: 114%;
@@ -189,22 +207,81 @@
 }
 
 .levelActive {
-  background: #f4c550;
-  border-color: #f4c550;
+  background: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
 .bookBtn {
   margin-top: 24px;
   padding: 16px 48px;
-  background: #f4c550;
+  background: var(--primary-color);
   border: none;
   border-radius: 12px;
   font-size: 18px;
   font-weight: 700;
   cursor: pointer;
-  width: fit-content;
+  width: 100%;
+  text-align: center;
+  transition: background-color 0.15s ease;
 }
 
 .bookBtn:hover {
-  background: #ffdc86;
+  background: var(--primary-hover);
+}
+
+/* Breakpoint: Tablet (>= 768px) */
+@media (min-width: 768px) {
+  .card {
+    flex-direction: row;
+    gap: 24px;
+    padding: 24px;
+  }
+
+  .avatarWrapper {
+    width: 120px;
+    height: 120px;
+    align-self: flex-start;
+  }
+
+  .avatar {
+    width: 96px;
+    height: 96px;
+  }
+
+  .top {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .name {
+    font-size: 24px;
+  }
+
+  .meta {
+    font-size: 16px;
+    gap: 16px;
+    padding-right: 0;
+  }
+
+  .divider {
+    display: block;
+  }
+
+  .favorite {
+    position: static;
+    padding: 0;
+  }
+
+  .info {
+    font-size: 16px;
+  }
+
+  .info span {
+    font-size: 16px;
+  }
+
+  .bookBtn {
+    width: fit-content;
+  }
 }
