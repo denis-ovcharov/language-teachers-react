@@ -18,10 +18,13 @@ export default function Header() {
 
   const { pathname } = useLocation();
 
+  const [prevPathname, setPrevPathname] = useState(pathname);
+
   // Close mobile menu when route changes
-  useEffect(() => {
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
     setIsMenuOpen(false);
-  }, [pathname]);
+  }
 
   // Handle body scroll locking when mobile menu is open
   useEffect(() => {
