@@ -4,6 +4,7 @@ import { db } from "../../lib/firebase";
 import type { Teacher } from "../../types";
 import TeacherCard from "../TeacherCard/TeacherCard";
 import styles from "./TeachersList.module.css";
+import Loader from "../Loader/Loader";
 
 const PAGE_SIZE = 4;
 
@@ -61,26 +62,32 @@ export default function TeachersList({
 
   return (
     <div className={styles.wrapper}>
-      <ul className={styles.list}>
-        {visible.map((teacher) => (
-          <li key={teacher.id}>
-            <TeacherCard
-              teacher={teacher}
-              isFavorite={favorites.includes(teacher.id)}
-              onToggleFavorite={onToggleFavorite}
-              activeLevel={level === "All" ? undefined : level}
-            />
-          </li>
-        ))}
-      </ul>
-      {hasMore && (
-        <button
-          className={styles.loadMore}
-          onClick={() => setPage((p) => p + 1)}
-          disabled={loading}
-        >
-          Load more
-        </button>
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <ul className={styles.list}>
+            {visible.map((teacher) => (
+              <li key={teacher.id}>
+                <TeacherCard
+                  teacher={teacher}
+                  isFavorite={favorites.includes(teacher.id)}
+                  onToggleFavorite={onToggleFavorite}
+                  activeLevel={level === "All" ? undefined : level}
+                />
+              </li>
+            ))}
+          </ul>
+          {hasMore && (
+            <button
+              className={styles.loadMore}
+              onClick={() => setPage((p) => p + 1)}
+              disabled={loading}
+            >
+              Load more
+            </button>
+          )}
+        </>
       )}
     </div>
   );
