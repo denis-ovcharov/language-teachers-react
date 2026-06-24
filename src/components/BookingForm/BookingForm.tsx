@@ -3,6 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import type { Teacher } from "../../types";
 import styles from "./BookingForm.module.css";
+import toast from "react-hot-toast";
 
 const schema = yup.object({
   reason: yup.string().required("Please select a reason"),
@@ -38,6 +39,7 @@ export default function BookingForm({ teacher, onClose }: BookingFormProps) {
 
   const onSubmit = (data: FormData) => {
     console.log(data);
+    toast.success("Your trial lesson has been booked!");
     onClose();
   };
 
