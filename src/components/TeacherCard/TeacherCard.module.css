@@ -219,6 +219,7 @@
   border-radius: 12px;
   font-size: 18px;
   font-weight: 700;
+  color: var(--text-main);
   cursor: pointer;
   width: 100%;
   text-align: center;
