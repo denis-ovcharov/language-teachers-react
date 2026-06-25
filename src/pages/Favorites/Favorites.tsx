@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { ref, get } from "firebase/database";
 import {
   doc,
@@ -15,6 +15,7 @@ import type { Teacher } from "../../types";
 import TeacherCard from "../../components/TeacherCard/TeacherCard";
 import styles from "./Favorites.module.css";
 import Loader from "../../components/Loader/Loader";
+import FiltersBox from "../../components/FiltersBox/FiltersBox";
 
 export default function Favorites() {
   const { user } = useAuth();
@@ -22,6 +23,21 @@ export default function Favorites() {
   const [favorites, setFavorites] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [favoritesLoaded, setFavoritesLoaded] = useState(false);
+
+  // стейт для фільтрів
+  const [language, setLanguage] = useState("All");
+  const [level, setLevel] = useState("All");
+  const [price, setPrice] = useState("All");
+
+  // фільтрація
+  const filtered = useMemo(() => {
+    return teachers.filter((t) => {
+      if (language !== "All" && !t.languages.includes(language)) return false;
+      if (level !== "All" && !t.levels.includes(level)) return false;
+      if (price !== "All" && t.price_per_hour !== Number(price)) return false;
+      return true;
+    });
+  }, [teachers, language, level, price]);
 
   // Завантажуємо favorites з Firestore
   useEffect(() => {
@@ -96,16 +112,25 @@ export default function Favorites() {
 
   return (
     <div className={`container ${styles.wrapper}`}>
-      {teachers.length === 0 ? (
+      <FiltersBox
+        language={language}
+        level={level}
+        price={price}
+        onLanguageChange={setLanguage}
+        onLevelChange={setLevel}
+        onPriceChange={setPrice}
+      />
+      {filtered.length === 0 ? (
         <p className={styles.empty}>No favorite teachers yet.</p>
       ) : (
         <ul className={styles.list}>
-          {teachers.map((teacher) => (
+          {filtered.map((teacher) => (
             <li key={teacher.id}>
               <TeacherCard
                 teacher={teacher}
                 isFavorite={favorites.includes(teacher.id)}
                 onToggleFavorite={handleToggleFavorite}
+                activeLevel={level === "All" ? undefined : level}
               />
             </li>
           ))}
