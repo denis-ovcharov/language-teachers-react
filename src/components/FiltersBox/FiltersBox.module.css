@@ -1,5 +1,6 @@
 .wrapper {
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
   margin-bottom: 32px;
 }
@@ -12,10 +13,14 @@
 }
 
 .group:nth-child(1) .select {
-  min-width: 235px;
+  min-width: 275px;
 }
 
 .group:nth-child(2) .select {
+  min-width: 275px;
+}
+
+.group:nth-child(3) .select {
   min-width: 275px;
 }
 
