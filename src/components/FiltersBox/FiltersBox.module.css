@@ -1,7 +1,6 @@
 .wrapper {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  gap: 20px;
   margin-bottom: 32px;
 }
 
@@ -9,44 +8,78 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  width: 100%;
+  position: relative;
+}
+
+.group:nth-child(1) .select {
+  min-width: 235px;
+}
+
+.group:nth-child(2) .select {
+  min-width: 275px;
 }
 
 .label {
-  font-weight: 500;
   font-size: 14px;
-  line-height: 129%;
-  color: var(--text-secondary);
+  color: rgba(18, 20, 23, 0.5);
 }
 
 .select {
-  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
   padding: 14px 18px;
-  border: none;
+  background: #fff;
   border-radius: 14px;
-  background: var(--bg-white);
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 111%;
-  color: var(--text-main);
   cursor: pointer;
-  outline: none;
-  appearance: none;
-  padding-right: 48px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23121417' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 16px center;
+  min-width: 180px;
+  user-select: none;
 }
 
-/* Breakpoint: Tablet (>= 768px) */
-@media (min-width: 768px) {
-  .wrapper {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
+.selectValue {
+  font-size: 18px;
+  font-weight: 700;
+}
 
-  .group {
-    width: auto;
-  }
+.arrow {
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+
+.arrowOpen {
+  transform: rotate(180deg);
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  background: #fff;
+  border-radius: 14px;
+  padding: 16px;
+  list-style: none;
+  margin: 0;
+  z-index: 10;
+  min-width: 100%;
+  box-shadow: 0 4px 36px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.option {
+  font-size: 18px;
+  color: rgba(18, 20, 23, 0.5);
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.option:hover {
+  color: #121417;
+}
+
+.optionActive {
+  font-weight: 700;
+  color: #121417;
 }
