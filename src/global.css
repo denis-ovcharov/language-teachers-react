@@ -62,8 +62,8 @@ body {
 @media (min-width: 1280px) {
   .container {
     max-width: 1255px;
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 32px;
+    padding-right: 32px;
   }
   .container-large {
     max-width: 1440px;
